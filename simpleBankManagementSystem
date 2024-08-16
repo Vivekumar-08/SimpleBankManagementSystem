@@ -6,7 +6,8 @@
 #define MAX_ACCOUNTS 1000
 #define MAX_TRANSACTIONS 10000
 
-typedef struct {
+typedef struct
+{
     char name[50];
     int age;
     char address[100];
@@ -18,7 +19,8 @@ typedef struct {
     float balance;
 } account;
 
-typedef struct {
+typedef struct
+{
     int accountNumber;
     char type[20];
     float amount;
@@ -39,12 +41,14 @@ void transferMoneyToBankAccount();
 void viewTransactions();
 int generateAccountNumber();
 int generateCustomerId();
-void logTransaction(int accountNumber, const char* type, float amount);
+void logTransaction(int accountNumber, const char *type, float amount);
 
-int main() {
+int main()
+{
     srand(time(0));
     int choice;
-    while (1) {
+    while (1)
+    {
         printf("\nBank Management System\n");
         printf("1. Create Account\n");
         printf("2. Delete Account\n");
@@ -56,30 +60,42 @@ int main() {
         printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        switch (choice) {
-            case 1: createAccount();
-                break;
-            case 2: deleteAccount();
-                break;
-            case 3: depositMoney();
-                break;
-            case 4: withdrawMoney();
-                break;
-            case 5: viewAccount();
-                break;
-            case 6: transferMoneyToBankAccount();
-                break;
-            case 7: viewTransactions();
-                break;
-            case 8: printf("Exiting...\n");
-                return 0;
-            default: printf("Invalid choice, please try again\n");
+        switch (choice)
+        {
+        case 1:
+            createAccount();
+            break;
+        case 2:
+            deleteAccount();
+            break;
+        case 3:
+            depositMoney();
+            break;
+        case 4:
+            withdrawMoney();
+            break;
+        case 5:
+            viewAccount();
+            break;
+        case 6:
+            transferMoneyToBankAccount();
+            break;
+        case 7:
+            viewTransactions();
+            break;
+        case 8:
+            printf("Exiting...\n");
+            return 0;
+        default:
+            printf("Invalid choice, please try again\n");
         }
     }
 }
 
-void createAccount() {
-    if (accountCount >= MAX_ACCOUNTS) {
+void createAccount()
+{
+    if (accountCount >= MAX_ACCOUNTS)
+    {
         printf("Maximum account limit reached!\n");
         return;
     }
@@ -111,7 +127,8 @@ void createAccount() {
     printf("Name: %s\nAge: %d\nAddress: %s\nPhone Number: %s\nEmail: %s\n", acc.name, acc.age, acc.address, acc.phoneNumber, acc.email);
 }
 
-void deleteAccount() {
+void deleteAccount()
+{
     int accountNumber;
     char name[50];
     printf("Enter your Account number: ");
@@ -119,9 +136,12 @@ void deleteAccount() {
     printf("Enter your name: ");
     scanf("%s", name);
 
-    for (int i = 0; i < accountCount; i++) {
-        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0) {
-            for (int j = i; j < accountCount - 1; j++) {
+    for (int i = 0; i < accountCount; i++)
+    {
+        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0)
+        {
+            for (int j = i; j < accountCount - 1; j++)
+            {
                 accounts[j] = accounts[j + 1];
             }
             accountCount--;
@@ -132,7 +152,8 @@ void deleteAccount() {
     printf("Account not found!\n");
 }
 
-void depositMoney() {
+void depositMoney()
+{
     int accountNumber;
     char name[50];
     float amount;
@@ -143,8 +164,10 @@ void depositMoney() {
     printf("Enter the amount to deposit: ");
     scanf("%f", &amount);
 
-    for (int i = 0; i < accountCount; i++) {
-        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0) {
+    for (int i = 0; i < accountCount; i++)
+    {
+        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0)
+        {
             accounts[i].balance += amount;
             printf("Amount deposited successfully!\n");
             printf("New Balance: %.2f\n", accounts[i].balance);
@@ -155,7 +178,8 @@ void depositMoney() {
     printf("Account not found!\n");
 }
 
-void withdrawMoney() {
+void withdrawMoney()
+{
     int accountNumber, entPass;
     char name[50];
     float amount;
@@ -169,18 +193,26 @@ void withdrawMoney() {
     printf("Enter the amount to withdraw: ");
     scanf("%f", &amount);
 
-    for (int i = 0; i < accountCount; i++) {
-        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0) {
-            if (accounts[i].password == entPass) {
-                if (accounts[i].balance >= amount) {
+    for (int i = 0; i < accountCount; i++)
+    {
+        if (accounts[i].accountNumber == accountNumber && strcmp(accounts[i].name, name) == 0)
+        {
+            if (accounts[i].password == entPass)
+            {
+                if (accounts[i].balance >= amount)
+                {
                     accounts[i].balance -= amount;
                     printf("Amount withdrawn successfully!\n");
                     printf("New Balance: %.2f\n", accounts[i].balance);
                     logTransaction(accountNumber, "Withdrawal", amount);
-                } else {
+                }
+                else
+                {
                     printf("Insufficient balance!\n");
                 }
-            } else {
+            }
+            else
+            {
                 printf("Wrong password, please try again!\n");
             }
             return;
@@ -189,13 +221,16 @@ void withdrawMoney() {
     printf("Account not found!\n");
 }
 
-void viewAccount() {
+void viewAccount()
+{
     int accountNumber;
     printf("Enter your Account number: ");
     scanf("%d", &accountNumber);
 
-    for (int i = 0; i < accountCount; i++) {
-        if (accounts[i].accountNumber == accountNumber) {
+    for (int i = 0; i < accountCount; i++)
+    {
+        if (accounts[i].accountNumber == accountNumber)
+        {
             printf("Account Details:\n");
             printf("Account Number: %d\n", accounts[i].accountNumber);
             printf("Customer ID: %d\n", accounts[i].customerID);
@@ -211,7 +246,8 @@ void viewAccount() {
     printf("Account not found!\n");
 }
 
-void transferMoneyToBankAccount() {
+void transferMoneyToBankAccount()
+{
     int fromAccount, toAccount, entPass;
     float amount;
 
@@ -227,26 +263,34 @@ void transferMoneyToBankAccount() {
     account *fromAcc = NULL;
     account *toAcc = NULL;
 
-    for (int i = 0; i < accountCount; i++) {
-        if (accounts[i].accountNumber == fromAccount) {
-            if (accounts[i].password == entPass) {
+    for (int i = 0; i < accountCount; i++)
+    {
+        if (accounts[i].accountNumber == fromAccount)
+        {
+            if (accounts[i].password == entPass)
+            {
                 fromAcc = &accounts[i];
-            } else {
+            }
+            else
+            {
                 printf("Wrong password, please try again!\n");
                 return;
             }
         }
-        if (accounts[i].accountNumber == toAccount) {
+        if (accounts[i].accountNumber == toAccount)
+        {
             toAcc = &accounts[i];
         }
     }
 
-    if (fromAcc == NULL || toAcc == NULL) {
+    if (fromAcc == NULL || toAcc == NULL)
+    {
         printf("One or both account numbers not found!\n");
         return;
     }
 
-    if (fromAcc->balance >= amount) {
+    if (fromAcc->balance >= amount)
+    {
         fromAcc->balance -= amount;
         toAcc->balance += amount;
         printf("Transfer successful!\n");
@@ -254,34 +298,43 @@ void transferMoneyToBankAccount() {
         printf("New Balance of %d: %.2f\n", toAcc->accountNumber, toAcc->balance);
         logTransaction(fromAccount, "Transfer Out", amount);
         logTransaction(toAccount, "Transfer In", amount);
-    } else {
+    }
+    else
+    {
         printf("Insufficient balance!\n");
     }
 }
 
-void viewTransactions() {
+void viewTransactions()
+{
     int accountNumber;
     printf("Enter your Account number: ");
     scanf("%d", &accountNumber);
 
     printf("Transaction History for Account Number: %d\n", accountNumber);
-    for (int i = 0; i < transactionCount; i++) {
-        if (transactions[i].accountNumber == accountNumber) {
+    for (int i = 0; i < transactionCount; i++)
+    {
+        if (transactions[i].accountNumber == accountNumber)
+        {
             printf("Type: %s, Amount: %.2f, Date: %s\n", transactions[i].type, transactions[i].amount, transactions[i].date);
         }
     }
 }
 
-int generateAccountNumber() {
+int generateAccountNumber()
+{
     return rand() % 900000000 + 100000000;
 }
 
-int generateCustomerId() {
+int generateCustomerId()
+{
     return rand() % 9000000 + 1000000;
 }
 
-void logTransaction(int accountNumber, const char* type, float amount) {
-    if (transactionCount >= MAX_TRANSACTIONS) {
+void logTransaction(int accountNumber, const char *type, float amount)
+{
+    if (transactionCount >= MAX_TRANSACTIONS)
+    {
         printf("Transaction log is full!\n");
         return;
     }
