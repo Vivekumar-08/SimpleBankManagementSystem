@@ -36,7 +36,7 @@ typedef struct
       float balance;
   } account;
 
-# Transaction Structure
+## Transaction Structure
 typedef struct
 {
     int accountNumber;
@@ -45,7 +45,7 @@ typedef struct
     char date[20];
 } transaction;
 
-# Functionality
+## Functionality
 1. createAccount()
 Creates a new account and assigns a unique account number and customer ID to the user.
 
@@ -67,20 +67,22 @@ Transfers money between two accounts after password verification.
 7. viewTransactions()
 Shows the transaction history for a specific account.
 
-# How to Run the Program
-# Clone the repository: 
+## How to Run the Program
+## Clone the repository: 
 git clone https://github.com/your-username/bank-management-system.git
 
-# Compile the code: Use the following command to compile the C program:
+## Compile the code: 
+Use the following command to compile the C program:
 gcc bank_management_system.c -o bank_management_system
 
-# Run the program: Run the compiled binary to start the Bank Management System:
+## Run the program:
+Run the compiled binary to start the Bank Management System:
 ./bank_management_system
 
-# Navigate the Menu: 
+## Navigate the Menu: 
 The program will present a menu where you can select actions like creating accounts, depositing money, viewing transactions, etc.
 
-# Example
+## Example
 Here is an example interaction with the program: 
 Bank Management System
 1. Create Account
@@ -103,12 +105,12 @@ Account created successfully!
 Account Number: 123456789
 Customer ID: 7654321
 
-# Future Improvements
+## Future Improvements
 Save account and transaction data to files to persist between program runs.
 Add encryption for passwords.
 Implement interest calculation for savings accounts.
 
-# License
+## License
 This project is licensed under the MIT License. Feel free to use and modify it as per your needs.
 Feel free to replace any placeholders with actual information, and modify the README to suit your project’s needs!
 
